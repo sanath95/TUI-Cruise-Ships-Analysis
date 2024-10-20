@@ -90,14 +90,23 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 ### Observations
 
-| Feature 1                   | Feature 2                   | Vessel 1 Correlation | Vessel 2 Correlation |
-| --------------------------- | --------------------------- | -------------------- | -------------------- |
-| Diesel Generator Power (MW) | Propulsion Power (MW)       | 0.995799             | 0.991696             |
-| Propulsion Power (MW)       | Speed Through Water (knots) | 0.911505             | 0.904470             |
-| HVAC Chiller Power (MW)     | Sea Temperature (Celsius)   | 0.911329             | 0.885724             |
-| Diesel Generator Power (MW) | Boiler Fuel Flow Rate (L/h) | -0.660057            | -0.659181            |
-| Diesel Generator Power (MW) | Scrubber Power (MW)         | 0.862290             | 0.490685             |
-| Speed Through Water (knots) | Trim (m)                    | -0.534795            | -0.191748            |
+|   | Feature 1                   | Feature 2                   | Vessel 1 Correlation | Vessel 2 Correlation |
+| - | --------------------------- | --------------------------- | -------------------- | -------------------- |
+| 1 | Diesel Generator Power (MW) | Propulsion Power (MW)       | 0.995799             | 0.991696             |
+| 2 | Propulsion Power (MW)       | Speed Through Water (knots) | 0.911505             | 0.904470             |
+| 3 | HVAC Chiller Power (MW)     | Sea Temperature (Celsius)   | 0.911329             | 0.885724             |
+| 4 | Diesel Generator Power (MW) | Boiler Fuel Flow Rate (L/h) | -0.660057            | -0.659181            |
+| 5 | Diesel Generator Power (MW) | Scrubber Power (MW)         | 0.862290             | 0.490685             |
+| 6 | Speed Through Water (knots) | Trim (m)                    | -0.534795            | -0.191748            |
+
+#### **Diesel Generator Power and Main Engine Fuel Flow Rate**
+
+| Feature 1                    | Feature 2                           | Vessel 1 Correlation | Vessel 2 Correlation |
+| ---------------------------- | ----------------------------------- | -------------------- | -------------------- |
+|Diesel Generator 1 Power (MW) | Main Engine 1 Fuel Flow Rate (kg/h) | 0.999219             | 0.998309             |
+|Diesel Generator 2 Power (MW) | Main Engine 2 Fuel Flow Rate (kg/h) | 0.998504             | 0.996328             |
+|Diesel Generator 3 Power (MW) | Main Engine 3 Fuel Flow Rate (kg/h) | 0.992567             | 0.998333             |
+|Diesel Generator 4 Power (MW) | Main Engine 4 Fuel Flow Rate (kg/h) | 0.997194             | 0.996969             |
 
 ---
 
@@ -126,6 +135,10 @@ The different correlations between Diesel Generator power and scrubber consumpti
 6. **Importance of Trim Optimization for Vessel Performance:**
 
 Trim adjustments have a significant impact on speed and resistance for Vessel 1, indicating a potential area for performance improvement through trim management. Vessel 2 appears to be less affected by trim changes, possibly due to design differences.
+
+7. **Tight Coupling Between Diesel Generators and Main Engines:**
+
+The power generation by Diesel Generators is almost perfectly aligned with the fuel flow rate of the corresponding Main Engines, indicating a direct relationship between engine load and generator power output. The near-perfect correlations can serve as a benchmark for detecting anomalies or deviations in the relationship, which could indicate potential engine or generator issues.
 
 > These inferences are based on linear correlations only and do not imply causation.
 
