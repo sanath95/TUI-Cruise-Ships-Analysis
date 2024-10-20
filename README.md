@@ -90,14 +90,14 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 ### Observations
 
-|   | Feature 1                   | Feature 2                   | Vessel 1 Correlation | Vessel 2 Correlation |
-| - | --------------------------- | --------------------------- | -------------------- | -------------------- |
-| 1 | Diesel Generator Power (MW) | Propulsion Power (MW)       | 0.995799             | 0.991696             |
-| 2 | Propulsion Power (MW)       | Speed Through Water (knots) | 0.911505             | 0.904470             |
-| 3 | HVAC Chiller Power (MW)     | Sea Temperature (Celsius)   | 0.911329             | 0.885724             |
-| 4 | Diesel Generator Power (MW) | Boiler Fuel Flow Rate (L/h) | -0.660057            | -0.659181            |
-| 5 | Diesel Generator Power (MW) | Scrubber Power (MW)         | 0.862290             | 0.490685             |
-| 6 | Speed Through Water (knots) | Trim (m)                    | -0.534795            | -0.191748            |
+| Feature 1                   | Feature 2                   | Vessel 1 Correlation | Vessel 2 Correlation |
+| --------------------------- | --------------------------- | -------------------- | -------------------- |
+| Diesel Generator Power (MW) | Propulsion Power (MW)       | 0.995799             | 0.991696             |
+| Propulsion Power (MW)       | Speed Through Water (knots) | 0.911505             | 0.904470             |
+| HVAC Chiller Power (MW)     | Sea Temperature (Celsius)   | 0.911329             | 0.885724             |
+| Diesel Generator Power (MW) | Boiler Fuel Flow Rate (L/h) | -0.660057            | -0.659181            |
+| Diesel Generator Power (MW) | Scrubber Power (MW)         | 0.862290             | 0.490685             |
+| Speed Through Water (knots) | Trim (m)                    | -0.534795            | -0.191748            |
 
 #### **Diesel Generator Power and Main Engine Fuel Flow Rate**
 
