@@ -80,65 +80,35 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 **Vessel 1**
 
-![vessel 1 correlation matrix](./assets/vessel1_correlation_matrix.jpg)
+![vessel 1 correlation matrix](./assets/vessel1_correlation_matrix.png)
 
 **Vessel 2**
 
-![vessel 2 correlation matrix](./assets/vessel2_correlation_matrix.jpg)
+![vessel 2 correlation matrix](./assets/vessel2_correlation_matrix.png)
 
 ---
 
 ### Observations
 
-| Feature 1                   | Feature 2                   | Vessel 1 Correlation | Vessel 2 Correlation |
-| --------------------------- | --------------------------- | -------------------- | -------------------- |
-| Diesel Generator Power (MW) | Propulsion Power (MW)       | 0.995799             | 0.991696             |
-| Propulsion Power (MW)       | Speed Through Water (knots) | 0.911505             | 0.904470             |
-| HVAC Chiller Power (MW)     | Sea Temperature (Celsius)   | 0.911329             | 0.885724             |
-| Diesel Generator Power (MW) | Boiler Fuel Flow Rate (L/h) | -0.660057            | -0.659181            |
-| Diesel Generator Power (MW) | Scrubber Power (MW)         | 0.862290             | 0.490685             |
-| Speed Through Water (knots) | Trim (m)                    | -0.534795            | -0.191748            |
-
-#### **Diesel Generator Power and Main Engine Fuel Flow Rate**
-
-| Feature 1               | Feature 2                    | Vessel 1 Correlation | Vessel 2 Correlation |
-| ----------------------- | ---------------------------- | -------------------- | -------------------- |
-|Diesel Generator 1 Power | Main Engine 1 Fuel Flow Rate | 0.999219             | 0.998309             |
-|Diesel Generator 2 Power | Main Engine 2 Fuel Flow Rate | 0.998504             | 0.996328             |
-|Diesel Generator 3 Power | Main Engine 3 Fuel Flow Rate | 0.992567             | 0.998333             |
-|Diesel Generator 4 Power | Main Engine 4 Fuel Flow Rate | 0.997194             | 0.996969             |
+| Feature 1                           | Feature 2                         | Vessel 1 Correlation | Vessel 2 Correlation |
+| ----------------------------------- | --------------------------------- | -------------------- | -------------------- |
+| Diesel Generator Power (MW)         | Propulsion Power (MW)             | 1.00                 | 0.99                 |
+| Diesel Generator Power (MW)         | Main Engine Fuel Flow Rate (kg/h) | 0.99                 | 1.00                 |
+| Speed Through Water (knots)         | Propulsion Power (MW)             | 0.91                 | 0.90                 |
+| HVAC Chiller Power (MW)             | Sea Temperature (Celsius)         | 0.91                 | 0.89                 |
+| Main Engine Fuel Flow Rate (kg/h)   | Boiler Fuel Flow Rate (L/h)       | -0.66                | -0.67                |
+| Diesel Generator Power (MW)         | Scrubber Power (MW)               | 0.86                 | 0.49                 |
+| Speed Through Water (knots)         | Trim (m)                          | -0.53                | -0.19                |
 
 ---
 
 ### Conclusions
 
-1. **Efficient Power Management for Propulsion Needs:**
-
-The strong link between Diesel Generator power and propulsion consumption across both vessels reflects a focus on efficiently matching power generation with propulsion demands, indicating good energy management practices.
-
-2. **Speed Optimization Through Power Management:**
-
-The high correlation between propulsion power and speed through water suggests that any adjustments in propulsion power can significantly influence speed, providing opportunities for optimizing speed for better fuel efficiency and route planning.
-
-3. **Adaptation to Environmental Conditions:**
-
-HVAC power consumption's strong correlation with sea temperature highlights the need for adaptive strategies to manage cooling loads as environmental conditions change, helping to maintain efficiency in warmer climates.
-
-4. **Dynamic Energy Management Strategies:**
-
-The inverse relationship between Diesel Generator power and Boiler fuel consumption demonstrates effective load-sharing practices, where waste heat recovery and other strategies help to optimize overall energy use and reduce the reliance on boiler fuel.
-
-5. **Variable Influence of Scrubber Operations:**
-
-The different correlations between Diesel Generator power and scrubber consumption for the two vessels suggest distinct emission control practices, with Vessel 1 showing a more direct link between generator activity and scrubber use compared to Vessel 2.
-
-6. **Importance of Trim Optimization for Vessel Performance:**
-
-Trim adjustments have a significant impact on speed and resistance for Vessel 1, indicating a potential area for performance improvement through trim management. Vessel 2 appears to be less affected by trim changes, possibly due to design differences.
-
-7. **Tight Coupling Between Diesel Generators and Main Engines:**
-
-The power generation by Diesel Generators is almost perfectly aligned with the fuel flow rate of the corresponding Main Engines, indicating a direct relationship between engine load and generator power output. The near-perfect correlations can serve as a benchmark for detecting anomalies or deviations in the relationship, which could indicate potential engine or generator issues.
+1. The vessels show high operational efficiency by aligning power generation, propulsion, and fuel usage.
+2. Both vessels efficiently convert propulsion power into forward motion, reflecting good propulsion system performance.
+3. Environmental factors like sea temperature significantly impact energy consumption, particularly in auxiliary systems like HVAC.
+4. The trade-off between main engine and boiler fuel usage indicates efforts to minimize overall fuel consumption, possibly through energy recovery techniques.
+5. Variability in scrubber usage and trim adjustments between the vessels may reflect different operational practices, vessel designs, or regulatory requirements.
 
 > These inferences are based on linear correlations only and do not imply causation.
 
