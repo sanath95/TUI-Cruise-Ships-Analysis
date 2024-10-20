@@ -65,7 +65,7 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 ### Correlation Analysis
 
-![Correlation Matrix](./assets/correlation_matrix.jpg)
+![Correlation Matrix](./assets/vessel1_correlation_matrix.jpg)
 
 | Feature 1                          | Feature 2                        | Pearson Correlation |
 |-----------------------------------|----------------------------------|---------------------|
