@@ -87,7 +87,7 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 7. **Trim (m) vs. Speed Through Water (knots) (-0.53 correlation):** This suggests that optimizing trim could help improve speed through the water and enhance fuel efficiency.
 8. **Speed Through Water (knots) vs. Speed Over Ground (knots) (0.99 correlation):** The high correlation implies minimal or stable water currents or tidal effects affecting the vessel.
 9. **Relative Wind Angle (Degrees) vs. True Wind Angle (Degrees) (0.94 correlation):** This suggests consistent alignment between the vessel's speed and course relative to wind direction.
-10. **Relative Wind Speed and Direction (weak correlations of 0.77 and 0.66):** Indicates variability in the vessel's speed or course, affecting how the wind is experienced onboard.
+10. **Relative Wind Speed (knots) vs. True Wind Speed (knots) (weak correlations 0.77) and Relative Wind Direction (Degrees) vs. True Wind Direction (Degrees) (weak correlation 0.66)** Indicates variability in the vessel's speed or course, affecting how the wind is experienced onboard.
 
 > These inferences are based on linear correlations only and do not imply causation.
 
