@@ -101,12 +101,12 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 #### **Diesel Generator Power and Main Engine Fuel Flow Rate**
 
-| Feature 1                    | Feature 2                           | Vessel 1 Correlation | Vessel 2 Correlation |
-| ---------------------------- | ----------------------------------- | -------------------- | -------------------- |
-|Diesel Generator 1 Power (MW) | Main Engine 1 Fuel Flow Rate (kg/h) | 0.999219             | 0.998309             |
-|Diesel Generator 2 Power (MW) | Main Engine 2 Fuel Flow Rate (kg/h) | 0.998504             | 0.996328             |
-|Diesel Generator 3 Power (MW) | Main Engine 3 Fuel Flow Rate (kg/h) | 0.992567             | 0.998333             |
-|Diesel Generator 4 Power (MW) | Main Engine 4 Fuel Flow Rate (kg/h) | 0.997194             | 0.996969             |
+| Feature 1               | Feature 2                    | Vessel 1 Correlation | Vessel 2 Correlation |
+| ----------------------- | ---------------------------- | -------------------- | -------------------- |
+|Diesel Generator 1 Power | Main Engine 1 Fuel Flow Rate | 0.999219             | 0.998309             |
+|Diesel Generator 2 Power | Main Engine 2 Fuel Flow Rate | 0.998504             | 0.996328             |
+|Diesel Generator 3 Power | Main Engine 3 Fuel Flow Rate | 0.992567             | 0.998333             |
+|Diesel Generator 4 Power | Main Engine 4 Fuel Flow Rate | 0.997194             | 0.996969             |
 
 ---
 
