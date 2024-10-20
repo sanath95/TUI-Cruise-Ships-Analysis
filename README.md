@@ -45,9 +45,13 @@ A document providing further details about the dataset: [Data Schema](./data/sch
     - Stern Thruster Power (MW)
     - Main Engine Fuel Flow Rate (kg/h)
 
+---
+
 ### Handle NA Values
 1. There are many columns with only 1 NA value. The value is filled by taking the mean of values before and after.
 2. There are few columns with upto 171 NA values. Since the measurements are sequential, these values are back filled (future scope: use regression to fill these na values).
+
+---
 
 ### Correlation
 
@@ -59,6 +63,8 @@ A document providing further details about the dataset: [Data Schema](./data/sch
 | Relative Wind Angle (Degrees) | True Wind Angle (Degrees) | 0.94 |
 | Relative Wind Speed (knots) | True Wind Speed (knots) | 0.77 |
 | Relative Wind Direction (Degrees) | True Wind Direction (Degrees) | 0.66 |
+
+---
 
 ### Inferences
 
@@ -73,6 +79,8 @@ A document providing further details about the dataset: [Data Schema](./data/sch
 9. A high positive correlation (0.94) between Relative Wind Angle (Degrees) and True Wind Angle (Degrees) suggests that the vessel's speed and course relative to the wind direction are consistent.
 10. However, a weak correlation (0.77, 0.66) between Relative Wind Speed (knots) and True Wind Speed (knots), Relative Wind Direction (Degrees) and True Wind Direction (Degrees) indicates some variability in the vessel's speed or course changes.
 > These inferences are based only on linear correlation between factors. They do not account for any causation.
+
+---
 
 ### Conclusions
 
