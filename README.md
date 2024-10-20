@@ -14,7 +14,8 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 - **Total Rows:** 105,120  
   - Each measurement is taken at 5-minute intervals.
-  - There are 541 missing (NA) values.
+  - There are 541 missing values in vessel 1 data (excluding Depth (m) column).
+  - There are 4786 missing values in vessel 2 data (excluding Depth (m) column).
 
 - **Total Columns:** 44  
   - Numeric: 41  
@@ -23,10 +24,15 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 ---
 
-## Vessel 1 Route
+## Route
 
-![Vessel 1 Route](./assets/vessel1_route.png)
+### Vessel 1
 
+![vessel 1 route](./assets/vessel1_route.png)
+
+### Vessel 2
+
+![vessel 2 route](./assets/vessel2_route.png)
 ---
 
 ## Exploratory Data Analysis
@@ -34,7 +40,7 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 ### Feature Selection
 1. **Dropped Columns:**
    - `Vessel Name` and `Bow Thruster 1 Power (MW)` had only one unique value, so they were removed.
-   - `Depth (m)` had 27,756 missing values (26.4% of the data), so it was dropped.
+   - `Depth (m)` had 27,756 missing values (26.4% of the data) in vessel 1 and 29,738 missing values (28.28% of the data) in vessel 2, so it was dropped.
    - `Propulsion Power (MW)` is the sum of `Port Side Propulsion Power (MW)` and `Starboard Side Propulsion Power (MW)`, so the individual propulsion columns were dropped.
    - `Start Time`, `End Time`, and `Local Time (h)` were dropped because measurements occur at consistent 5-minute intervals.
    - `Longitude (Degrees)` and `Latitude (Degrees)` were excluded from the analysis.
@@ -58,49 +64,70 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 ---
 
 ### Handling Missing Values
+
+**Vessel 1:**
+
 1. For columns with only one missing value, the gaps were filled using the mean of the values before and after.
 2. Other columns (with up to 171 missing values) were backfilled (future scope: regression techniques could be applied to fill these missing values).
+
+**Vessel 2:**
+
+1. All columns (with up to 972 missing values) were backfilled (future scope: regression techniques could be applied to fill these missing values).
 
 ---
 
 ### Correlation Analysis
 
-![Correlation Matrix](./assets/vessel1_correlation_matrix.jpg)
+**Vessel 1**
 
-| Feature 1                          | Feature 2                        | Pearson Correlation |
-|-----------------------------------|----------------------------------|---------------------|
-| Speed Through Water (knots)       | Speed Over Ground (knots)        | 0.99                |
-| Relative Wind Angle (Degrees)     | True Wind Angle (Degrees)        | 0.94                |
-| Relative Wind Speed (knots)       | True Wind Speed (knots)          | 0.77                |
-| Relative Wind Direction (Degrees) | True Wind Direction (Degrees)    | 0.66                |
+![vessel 1 correlation matrix](./assets/vessel1_correlation_matrix.jpg)
+
+**Vessel 2**
+
+![vessel 2 correlation matrix](./assets/vessel2_correlation_matrix.jpg)
 
 ---
 
-### Inferences
+### Observations
 
-1. **Diesel Generator Power (MW) vs. Propulsion Power (MW) (1.00 correlation):** The high positive correlation suggests that the diesel generator is primarily dedicated to supporting propulsion power demands, with non-propulsion electrical loads contributing only a small portion to total power consumption.
-2. **Propulsion Power (MW) vs. Speed Through Water (knots) (0.91 correlation):** This strong correlation implies that propulsion power consumption can be accurately estimated based on the vessel's speed through the water.
-3. **HVAC Chiller Power (MW) vs. Sea Temperature (°C) (0.91 correlation):** The high positive correlation indicates a consistent pattern where the chiller workload increases with rising temperatures due to greater cooling requirements.
-4. **Scrubber Power (MW) vs. Propulsion Power (MW) (0.85 correlation):** This suggests that optimizing propulsion efficiency could also reduce the scrubber system's power consumption.
-5. **Diesel Generator Power (MW) vs. Main Engine Fuel Flow Rate (kg/h) (0.78 correlation):** The correlation highlights the interdependence between mechanical and electrical power needs, suggesting opportunities for optimizing overall energy consumption.
-6. **Diesel Generator Power (MW) vs. Boiler Fuel Flow Rate (L/h) (-0.66 correlation):** The negative correlation indicates a trade-off or complementary usage between the Boiler and the Diesel Generator in meeting the ship's energy demands.
-7. **Trim (m) vs. Speed Through Water (knots) (-0.53 correlation):** This suggests that optimizing trim could help improve speed through the water and enhance fuel efficiency.
-8. **Speed Through Water (knots) vs. Speed Over Ground (knots) (0.99 correlation):** The high correlation implies minimal or stable water currents or tidal effects affecting the vessel.
-9. **Relative Wind Angle (Degrees) vs. True Wind Angle (Degrees) (0.94 correlation):** This suggests consistent alignment between the vessel's speed and course relative to wind direction.
-10. **Relative Wind Speed (knots) vs. True Wind Speed (knots) (weak correlations 0.77) and Relative Wind Direction (Degrees) vs. True Wind Direction (Degrees) (weak correlation 0.66)** Indicates variability in the vessel's speed or course, affecting how the wind is experienced onboard.
-
-> These inferences are based on linear correlations only and do not imply causation.
+| Feature 1                              | Feature 2                                | Vessel 1 Correlation | Vessel 2 Correlation |
+| -------------------------------------- | ---------------------------------------- | -------------------- | -------------------- |
+| Diesel Generator Power Generation (MW) | Propulsion Power Consumption (MW)        | 0.995799             | 0.991696             |
+| Propulsion Power Consumption (MW)      | Speed Through Water (knots)              | 0.911505             | 0.904470             |
+| HVAC Chiller Power Consumption (MW)    | Sea Temperature (Celsius)                | 0.911329             | 0.885724             |
+| Diesel Generator Power Generation (MW) | Boiler Fuel Flow Rate (L/h)              | -0.660057            | -0.659181            |
+| Diesel Generator Power Generation (MW) | Scrubber Power Consumption (MW)          | 0.862290             | 0.490685             |
+| Speed Through Water (knots)            | Trim (m)                                 | -0.534795            | -0.191748            |
 
 ---
 
 ### Conclusions
 
-1. **Efficiency Optimization:** Efforts to reduce speed or optimize routes can significantly impact overall power generation and fuel consumption, leading to potential savings.
-2. **Performance Consistency:** There are no significant variations in performance attributable to fouling or mechanical issues.
-3. **Energy Use Based on Temperature:** There is an opportunity to optimize energy consumption by using sea temperature forecasts to anticipate HVAC demand.
-4. **Fuel Efficiency and Environmental Compliance:** Reducing propulsion power can lower both fuel consumption and the demand for exhaust treatment.
-5. **Factors Influencing Generator Output:** The Diesel Generator's power output is influenced by more than just the Main Engine's fuel flow, including non-propulsion electrical loads (e.g., HVAC), sea conditions, or operational practices.
-6. **Load Shifting Strategy:** Implementing load-shifting strategies where the Boiler and Diesel Generator usage are adjusted based on demand could improve energy efficiency.
-7. **Trim Optimization:** Lower trim values could reduce hydrodynamic resistance, allowing for higher speeds at the same propulsion power. Proper cargo balancing and ballast adjustments could maximize speed and minimize fuel consumption.
+1. **Efficient Power Management for Propulsion Needs:**
+
+The strong link between Diesel Generator power and propulsion consumption across both vessels reflects a focus on efficiently matching power generation with propulsion demands, indicating good energy management practices.
+Speed Optimization Through Power Management:
+
+2. **Speed Optimization Through Power Management:**
+
+The high correlation between propulsion power and speed through water suggests that any adjustments in propulsion power can significantly influence speed, providing opportunities for optimizing speed for better fuel efficiency and route planning.
+
+3. **Adaptation to Environmental Conditions:**
+
+HVAC power consumption's strong correlation with sea temperature highlights the need for adaptive strategies to manage cooling loads as environmental conditions change, helping to maintain efficiency in warmer climates.
+
+4. **Dynamic Energy Management Strategies:**
+
+The inverse relationship between Diesel Generator power and Boiler fuel consumption demonstrates effective load-sharing practices, where waste heat recovery and other strategies help to optimize overall energy use and reduce the reliance on boiler fuel.
+
+5. **Variable Influence of Scrubber Operations:**
+
+The different correlations between Diesel Generator power and scrubber consumption for the two vessels suggest distinct emission control practices, with Vessel 1 showing a more direct link between generator activity and scrubber use compared to Vessel 2.
+
+6. **Importance of Trim Optimization for Vessel Performance:**
+
+Trim adjustments have a significant impact on speed and resistance for Vessel 1, indicating a potential area for performance improvement through trim management. Vessel 2 appears to be less affected by trim changes, possibly due to design differences.
+
+> These inferences are based on linear correlations only and do not imply causation.
 
 ---
