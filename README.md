@@ -106,7 +106,6 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 1. **Efficient Power Management for Propulsion Needs:**
 
 The strong link between Diesel Generator power and propulsion consumption across both vessels reflects a focus on efficiently matching power generation with propulsion demands, indicating good energy management practices.
-Speed Optimization Through Power Management:
 
 2. **Speed Optimization Through Power Management:**
 
