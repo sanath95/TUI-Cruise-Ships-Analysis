@@ -3,6 +3,11 @@ This project will Analyze the provided dataset for two Cruise ships and develop 
 
 # Vessel 1
 
+### Data Schema
+A document providing further details about the dataset: [Data Schema](./data/schema.pdf)
+
+---
+
 ## Data Overview
 
 - Rows: 105120
