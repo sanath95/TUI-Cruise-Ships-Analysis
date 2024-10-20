@@ -65,7 +65,7 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 ### Correlation Analysis
 
-![Correlation Matrix](./assets/correlation_matrix.png)
+![Correlation Matrix](./assets/correlation_matrix.jpg)
 
 | Feature 1                          | Feature 2                        | Pearson Correlation |
 |-----------------------------------|----------------------------------|---------------------|
@@ -78,11 +78,11 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 ### Inferences
 
-1. **Diesel Generator Power (MW) vs. Propulsion Power (MW) (0.99 correlation):** The high positive correlation suggests that the diesel generator is primarily dedicated to supporting propulsion power demands, with non-propulsion electrical loads contributing only a small portion to total power consumption.
+1. **Diesel Generator Power (MW) vs. Propulsion Power (MW) (1.00 correlation):** The high positive correlation suggests that the diesel generator is primarily dedicated to supporting propulsion power demands, with non-propulsion electrical loads contributing only a small portion to total power consumption.
 2. **Propulsion Power (MW) vs. Speed Through Water (knots) (0.91 correlation):** This strong correlation implies that propulsion power consumption can be accurately estimated based on the vessel's speed through the water.
 3. **HVAC Chiller Power (MW) vs. Sea Temperature (°C) (0.91 correlation):** The high positive correlation indicates a consistent pattern where the chiller workload increases with rising temperatures due to greater cooling requirements.
 4. **Scrubber Power (MW) vs. Propulsion Power (MW) (0.85 correlation):** This suggests that optimizing propulsion efficiency could also reduce the scrubber system's power consumption.
-5. **Diesel Generator Power (MW) vs. Main Engine Fuel Flow Rate (kg/h) (0.77 correlation):** The correlation highlights the interdependence between mechanical and electrical power needs, suggesting opportunities for optimizing overall energy consumption.
+5. **Diesel Generator Power (MW) vs. Main Engine Fuel Flow Rate (kg/h) (0.78 correlation):** The correlation highlights the interdependence between mechanical and electrical power needs, suggesting opportunities for optimizing overall energy consumption.
 6. **Diesel Generator Power (MW) vs. Boiler Fuel Flow Rate (L/h) (-0.66 correlation):** The negative correlation indicates a trade-off or complementary usage between the Boiler and the Diesel Generator in meeting the ship's energy demands.
 7. **Trim (m) vs. Speed Through Water (knots) (-0.53 correlation):** This suggests that optimizing trim could help improve speed through the water and enhance fuel efficiency.
 8. **Speed Through Water (knots) vs. Speed Over Ground (knots) (0.99 correlation):** The high correlation implies minimal or stable water currents or tidal effects affecting the vessel.
