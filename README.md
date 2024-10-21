@@ -179,8 +179,6 @@ Train Regression models to predict the Speed of the vessel based on other featur
    - Based on visual inspection of the clusters, clusters 0, 4, 5 are shown in blue and clusters 1, 2, 3, 6 are shown in red below.
    - Then the route map is plotted using latitude and longitude and colored based on the cluster they belong to.
    
-      ![vessel 1 route](./assets/vessel1_route.png)
-      ![vessel 2 route](./assets/vessel2_route.png)
 - **Feature Importance**
    - A Random Forest Classifier model is trained using the clusters as labels in order to find feature importance.
       | Feature                           | Feature Importance |
