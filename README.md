@@ -8,8 +8,6 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 ---
 
-# Vessel 1
-
 ## Data Overview
 
 - **Total Rows:** 105,120  
@@ -90,20 +88,6 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 ### Observations
 
-| Feature 1                           | Feature 2                         | Vessel 1 Correlation | Vessel 2 Correlation |
-| ----------------------------------- | --------------------------------- | -------------------- | -------------------- |
-| Diesel Generator Power (MW)         | Propulsion Power (MW)             | 1.00                 | 0.99                 |
-| Diesel Generator Power (MW)         | Main Engine Fuel Flow Rate (kg/h) | 0.99                 | 1.00                 |
-| Speed Through Water (knots)         | Propulsion Power (MW)             | 0.91                 | 0.90                 |
-| HVAC Chiller Power (MW)             | Sea Temperature (Celsius)         | 0.91                 | 0.89                 |
-| Main Engine Fuel Flow Rate (kg/h)   | Boiler Fuel Flow Rate (L/h)       | -0.66                | -0.67                |
-| Diesel Generator Power (MW)         | Scrubber Power (MW)               | 0.86                 | 0.49                 |
-| Speed Through Water (knots)         | Trim (m)                          | -0.53                | -0.19                |
-
----
-
-### Conclusions
-
 1. The vessels show high operational efficiency by aligning power generation, propulsion, and fuel usage.
 2. Both vessels efficiently convert propulsion power into forward motion, reflecting good propulsion system performance.
 3. Environmental factors like sea temperature significantly impact energy consumption, particularly in auxiliary systems like HVAC.
@@ -111,5 +95,79 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 5. Variability in scrubber usage and trim adjustments between the vessels may reflect different operational practices, vessel designs, or regulatory requirements.
 
 > These inferences are based on linear correlations only and do not imply causation.
+
+---
+
+## Regression Analysis
+
+Train Regression models to predict the Speed of the vessel based on other features.
+
+- **Models**
+   - Linear Regression
+   - XGB Regressor
+- **Training data:** 
+
+   Vessel 2
+   - Model is trained on 75% of the data (78840 rows).
+   - Model is tested on 25% of the data (26280 rows).
+- **Evaluation data:** 
+
+   Vessel 1
+   - Model is evaluated on 105120 rows of unseen data pertaining to a different vessel.
+- **Target Variable:** ``Speed Through Water (knots)``
+- **Features:**
+   - 'Propulsion Power (MW)'
+
+      |         |Linear Regression      |XGB Regressor          |
+      |---------|-----------------------|-----------------------|
+      |Test data|R² = 0.81, RMSE = 3.29 |R² = 0.95, RMSE = 1.56 |
+      |Eval data|R² = 0.82, RMSE = 3.17| R² = 0.96, RMSE = 1.39 |
+   
+   - 'Power Galley (MW)', 'Power Service (MW)', 'HVAC Chiller Power (MW)', 'Scrubber Power (MW)', 'Sea Temperature (Celsius)', 'Boiler Fuel Flow Rate (L/h)', 'Incinerator 1 Fuel Flow Rate (L/h)', 'Relative Wind Angle (Degrees)', 'Relative Wind Direction (Degrees)', 'Draft (m)', 'Relative Wind Speed (knots)', 'Trim (m)', 'Propulsion Power (MW)', 'Bow Thruster Power (MW)', 'Stern Thruster Power (MW)'
+      > ``Diesel Generator Power (MW)`` and ``Main Engine Fuel Flow Rate (kg/h)`` are excluded because they are highly correlated to ``Propulsion Power (MW)``
+
+      |         |Linear Regression      |XGB Regressor          |
+      |---------|-----------------------|-----------------------|
+      |Test data|R² = 0.86, RMSE = 2.84 |R² = 0.99, RMSE = 0.68 |
+      |Eval data|R² = 0.85, RMSE = 2.93 |R² = 0.94, RMSE = 1.83 |
+- **Key Performance Indicators:**
+   - Linear Regression
+
+      | Feature                            | Coefficient |
+      |------------------------------------|-------------|
+      | Propulsion Power (MW)              | 5.14        |
+      | Sea Temperature (Celsius)          | -1.03       |
+      | Scrubber Power (MW)                | 0.98        |
+      | Boiler Fuel Flow Rate (L/h)        | -0.81       |
+      | Incinerator 1 Fuel Flow Rate (L/h) | 0.73        |
+
+   - XGB Regressor
+
+      | Feature                            | Feature Importance |
+      |------------------------------------|--------------------|
+      | Propulsion Power (MW)              | 0.93               |
+      | Bow Thruster Power (MW)            | 0.01               |
+      | Draft (m)                          | 0.008              |
+      | Incinerator 1 Fuel Flow Rate (L/h) | 0.006              |
+      | Scrubber Power (MW)                | 0.005              |
+- **Observations**
+   - When using "Propulsion Power (MW)" as the sole feature to predict "Speed Through Water (knots)", XGB achieves a high R² (0.95 on the test data and 0.96 on the evaluation data), indicating that this feature alone explains most of the variance in the vessel's speed.
+   - Incorporating additional features improves both models' performance. For the XGB Regressor, the R² increases to 0.99 on the test data, indicating a nearly perfect fit. However, its performance drops slightly when evaluated on unseen data (R² = 0.94), indicating some overfitting to the training vessel data.
+   - The results imply that "Propulsion Power (MW)" is the most critical factor for predicting vessel speed, suggesting a direct and strong relationship between engine power and vessel velocity.
+   - Environmental conditions like "Sea Temperature (Celsius)" also impact vessel speed, although their effects are less pronounced compared to propulsion power.
+
+---
+
+## Conclusions
+
+1. **Operational Efficiency and Power Alignment:**
+   - The vessels exhibit a high degree of operational efficiency, as demonstrated by the strong correlation between power generation, propulsion power, and speed. This alignment suggests that the vessels are effectively managing their power systems to optimize energy usage and maintain consistent speed performance.
+   - The use of "Propulsion Power (MW)" as the primary predictor for "Speed Through Water (knots)" reveals that the propulsion system's ability to convert mechanical power into forward motion is highly efficient.
+2. **Impact of Environmental Factors on Energy Management:**
+   - The negative relationship between sea temperature and speed observed in the Linear Regression model suggests that higher temperatures may reduce vessel speed, possibly due to increased water resistance or the need for more energy to power auxiliary systems like HVAC.
+3. **Fuel Consumption Optimization Strategies:**
+   - The trade-off between the usage of the main engine and boiler fuel indicates efforts to optimize overall fuel consumption. By balancing power generation across multiple energy sources, the vessels may employ energy recovery techniques or load management strategies to minimize fuel usage.
+4. **Operational Variability and Adaptation:**
+   - The differences in scrubber usage and trim adjustments between the vessels reflect variations in operational practices, vessel designs, or compliance with different regulatory requirements. For example, scrubbers, which reduce sulfur emissions, may be used more frequently on certain routes or in regions with stricter environmental regulations.
 
 ---
