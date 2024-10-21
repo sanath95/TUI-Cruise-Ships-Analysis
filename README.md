@@ -2,9 +2,17 @@
 
 This project analyzes the provided dataset for two cruise ships and develops a narrative explaining performance trends.
 
-The [data](./data/data.csv) used for this project can be found here.
-
-For further details about the dataset, refer to the [Data Schema](./data/schema.pdf).
+## Folder Structure
+1. **Data**
+   - *./data/data.csv:* The data used for this project can be found here.
+   - *./data/schema.pdf:* For further details about the dataset, refer to the data schema.
+2. **Code**
+   - *./code/vessel1.ipynb:* Code for exploratory data analysis for vessel 1.
+   - *./code/vessel2.ipynb:* Code for exploratory data analysis for vessel 2.
+   - *./code/regression.ipynb:* Code for regression analysis.
+   - *./code/clustering.ipynb:* Code for clustering.
+3. **Assets**
+   - *./assets/\*:* Contains plots and images for preparing the documentation.
 
 ---
 
@@ -20,17 +28,6 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
   - Categorical: 1  
   - Time: 2  
 
----
-
-## Route
-
-### Vessel 1
-
-![vessel 1 route](./assets/vessel1_route.png)
-
-### Vessel 2
-
-![vessel 2 route](./assets/vessel2_route.png)
 ---
 
 ## Exploratory Data Analysis
@@ -63,12 +60,12 @@ For further details about the dataset, refer to the [Data Schema](./data/schema.
 
 ### Handling Missing Values
 
-**Vessel 1:**
+**Vessel 1**
 
 1. For columns with only one missing value, the gaps were filled using the mean of the values before and after.
 2. Other columns (with up to 171 missing values) were backfilled (future scope: regression techniques could be applied to fill these missing values).
 
-**Vessel 2:**
+**Vessel 2**
 
 1. All columns (with up to 972 missing values) were backfilled (future scope: regression techniques could be applied to fill these missing values).
 
@@ -105,17 +102,17 @@ Train Regression models to predict the Speed of the vessel based on other featur
 - **Models**
    - Linear Regression
    - XGB Regressor
-- **Training data:** 
+- **Training data** 
 
    Vessel 2
    - Model is trained on 75% of the data (78840 rows).
    - Model is tested on 25% of the data (26280 rows).
-- **Evaluation data:** 
+- **Evaluation data** 
 
    Vessel 1
    - Model is evaluated on 105120 rows of unseen data pertaining to a different vessel.
-- **Target Variable:** ``Speed Through Water (knots)``
-- **Features:**
+- **Target Variable** ``Speed Through Water (knots)``
+- **Features**
    - 'Propulsion Power (MW)'
 
       |         |Linear Regression      |XGB Regressor          |
@@ -130,7 +127,7 @@ Train Regression models to predict the Speed of the vessel based on other featur
       |---------|-----------------------|-----------------------|
       |Test data|R² = 0.86, RMSE = 2.84 |R² = 0.99, RMSE = 0.68 |
       |Eval data|R² = 0.85, RMSE = 2.93 |R² = 0.94, RMSE = 1.83 |
-- **Key Performance Indicators:**
+- **Key Performance Indicators**
    - Linear Regression
 
       | Feature                            | Coefficient |
@@ -155,6 +152,48 @@ Train Regression models to predict the Speed of the vessel based on other featur
    - Incorporating additional features improves both models' performance. For the XGB Regressor, the R² increases to 0.99 on the test data, indicating a nearly perfect fit. However, its performance drops slightly when evaluated on unseen data (R² = 0.94), indicating some overfitting to the training vessel data.
    - The results imply that "Propulsion Power (MW)" is the most critical factor for predicting vessel speed, suggesting a direct and strong relationship between engine power and vessel velocity.
    - Environmental conditions like "Sea Temperature (Celsius)" also impact vessel speed, although their effects are less pronounced compared to propulsion power.
+
+---
+
+## Clustering
+
+- **Model**
+   - KMeans
+- **Training Data**
+   - Vessel 1
+- **Inference Data**
+   - Vessel 2
+- **Features Used**
+   - 'Power Galley (MW)', 'Power Service (MW)', 'HVAC Chiller Power (MW)', 'Scrubber Power (MW)', 'Sea Temperature (Celsius)', 'Boiler Fuel Flow Rate (L/h)', 'Incinerator 1 Fuel Flow Rate (L/h)', 'Diesel Generator Power (MW)', 'Relative Wind Angle (Degrees)', 'Relative Wind Direction (Degrees)', 'Draft (m)', 'Relative Wind Speed (knots)', 'Speed Through Water (knots)', 'Trim (m)', 'Propulsion Power (MW)', 'Bow Thruster Power (MW)', 'Stern Thruster Power (MW)', 'Main Engine Fuel Flow Rate (kg/h)', 'Cluster'
+- **Elbow Graph**
+   - k = 7
+   - The optimal k value is identified at the point where the graph bends like an elbow.
+
+      ![elbow graph](./assets/elbow_graph.png)
+- **Clusters**
+   - Train a KMeans model for 7 clusters.
+   - PCA is applied to reduce the dimension to 2 principal components. Clusters are visualized with a scatter plot.
+
+      ![clusters](./assets/clusters.png)
+- **Route**
+   - Based on visual inspection of the clusters, clusters 0, 4, 5 are shown in blue and clusters 1, 2, 3, 6 are shown in red below.
+   - Then the route map is plotted using latitude and longitude and colored based on the cluster they belong to.
+   
+      ![vessel 1 route](./assets/vessel1_route.png)
+      ![vessel 2 route](./assets/vessel2_route.png)
+- **Feature Importance**
+   - A Random Forest Classifier model is trained using the clusters as labels in order to find feature importance.
+      | Feature                           | Feature Importance |
+      |-----------------------------------|--------------------|
+      | Power Galley (MW)                 | 0.146415           |
+      | Sea Temperature (Celsius)         | 0.138925           |
+      | Diesel Generator Power (MW)       | 0.109070           |
+      | HVAC Chiller Power (MW)           | 0.108595           |
+      | Main Engine Fuel Flow Rate (kg/h) | 0.076971           |
+- **Observations:**
+   - By mapping the routes based on the cluster membership, patterns in vessel behavior across different geographic regions can be observed.
+   - The influence of Power Galley on clustering suggests that optimizing these auxiliary power sources could lead to significant improvements in energy efficiency.
+   - Variations in Sea Temperature affecting cluster assignments indicate that weather and environmental conditions significantly impact energy consumption patterns.
 
 ---
 
