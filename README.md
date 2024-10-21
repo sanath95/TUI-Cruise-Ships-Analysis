@@ -208,5 +208,7 @@ Train Regression models to predict the Speed of the vessel based on other featur
    - The trade-off between the usage of the main engine and boiler fuel indicates efforts to optimize overall fuel consumption. By balancing power generation across multiple energy sources, the vessels may employ energy recovery techniques or load management strategies to minimize fuel usage.
 4. **Operational Variability and Adaptation:**
    - The differences in scrubber usage and trim adjustments between the vessels reflect variations in operational practices, vessel designs, or compliance with different regulatory requirements. For example, scrubbers, which reduce sulfur emissions, may be used more frequently on certain routes or in regions with stricter environmental regulations.
+5. **Clustering and Route Analysis:**
+   - Clustering revealed patterns in vessel behavior across different regions, with auxiliary power sources like Power Galley significantly impacting cluster assignments. Sea temperature variations influencing clustering highlight the importance of environmental conditions on energy usage trends.
 
 ---
